@@ -12,8 +12,8 @@ A simple Node.js/Express API that returns profile information with dynamic cat f
 {
   "status": "success",
   "user": {
-    "email": "your-email@example.com",
-    "name": "Your Full Name",
+    "email": "yiranubari4@gmail.com",
+    "name": "Yiranubari Maamaa",
     "stack": "Node.js/Express"
   },
   "timestamp": "2024-01-15T10:30:00.000Z",
