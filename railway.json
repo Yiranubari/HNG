@@ -1,0 +1,9 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "installCommand": "env -u NPM_CONFIG_PRODUCTION npm ci --omit=dev"
+  },
+  "deploy": {
+    "command": "node server.js"
+  }
+}
