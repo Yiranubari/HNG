@@ -9,36 +9,40 @@ A small REST API that returns profile information plus a random cat fact from th
 ### GET `/api/me`
 
 Success (200)
+
 ```json
 {
-    "status": "success",
-    "user": {
-        "email": "lovedayrichman@yahoo.com",
-        "name": "Richman Loveday",
-        "stack": "Laravel 11 / PHP"
-    },
-    "timestamp": "2025-10-16T10:03:22Z",
-    "fact": "Cats sleep for 70% of their lives."
+  "status": "success",
+  "user": {
+    "email": "yiranubari4@gmail.com",
+    "name": "Yiranubari Maamaa",
+    "stack": "Laravel 11 / PHP"
+  },
+  "timestamp": "2025-10-16T10:03:22Z",
+  "fact": "Cats sleep for 70% of their lives."
 }
 ```
 
 External API failure (503)
+
 ```json
 {
-    "status": "error",
-    "message": "Failed to fetch cat fact. Please try again later."
+  "status": "error",
+  "message": "Failed to fetch cat fact. Please try again later."
 }
 ```
 
 Too many requests (429)
+
 ```json
 {
-    "status": "error",
-    "message": "Too many requests. Please slow down and try again later."
+  "status": "error",
+  "message": "Too many requests. Please slow down and try again later."
 }
 ```
 
 Quick curl example:
+
 ```bash
 curl -sS http://127.0.0.1:8000/api/me | jq
 ```
@@ -46,6 +50,7 @@ curl -sS http://127.0.0.1:8000/api/me | jq
 ---
 
 ## 🗂️ Project Structure
+
 ```
 app/
 ├─ Http/Controllers/ProfileController.php
@@ -59,6 +64,7 @@ routes/
 ## ⚙️ Setup
 
 Clone & install
+
 ```bash
 git clone https://github.com/<your-repo>.git
 cd <your-repo>
@@ -68,6 +74,7 @@ php artisan key:generate
 ```
 
 Environment (.env) — adjust as needed:
+
 ```
 APP_URL=http://127.0.0.1:8000
 DB_CONNECTION=sqlite
@@ -77,6 +84,7 @@ SESSION_DRIVER=file
 ```
 
 Run
+
 ```bash
 php artisan serve
 # Visit: http://127.0.0.1:8000/api/me
@@ -95,7 +103,9 @@ php artisan serve
 ---
 
 ## 🌍 Live Demo
+
 Base URL (example):
+
 ```
 https://hng13-stage0.pxxl.click/api/me
 ```
