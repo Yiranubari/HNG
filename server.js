@@ -1,30 +1,35 @@
 const express = require("express");
-const cors = require("cors");
 const axios = require("axios");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
-// Root endpoint
+// Health check
 app.get("/", (req, res) => {
   res.json({
-    message: "HNG Stage 0 API - Profile Endpoint",
-    available_endpoints: {
-      "GET /me": "Returns profile info with cat fact",
-    },
+    status: "running",
+    message: "HNG Stage 0 API is live!",
+    endpoint: "GET /me",
   });
 });
 
 // Main endpoint
 app.get("/me", async (req, res) => {
   try {
-    console.log("Fetching cat fact...");
-    const catFactResponse = await axios.get("https://catfact.ninja/fact", {
-      timeout: 5000,
+    console.log("📞 Fetching cat fact...");
+    const catResponse = await axios.get("https://catfact.ninja/fact", {
+      timeout: 10000,
     });
 
     const response = {
@@ -35,13 +40,13 @@ app.get("/me", async (req, res) => {
         stack: "Node.js/Express",
       },
       timestamp: new Date().toISOString(),
-      fact: catFactResponse.data.fact,
+      fact: catResponse.data.fact,
     };
 
-    console.log("Success:", response);
+    console.log("✅ Success:", response.user.name);
     res.json(response);
   } catch (error) {
-    console.log("Cat API failed, using fallback");
+    console.log("❌ Cat API failed, using fallback");
     const fallbackResponse = {
       status: "success",
       user: {
@@ -50,7 +55,7 @@ app.get("/me", async (req, res) => {
         stack: "Node.js/Express",
       },
       timestamp: new Date().toISOString(),
-      fact: "Cats can jump up to 6 times their height!",
+      fact: "A group of cats is called a clowder.",
     };
 
     res.json(fallbackResponse);
@@ -59,6 +64,7 @@ app.get("/me", async (req, res) => {
 
 // Start server
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📝 Test endpoint: http://0.0.0.0:${PORT}/me`);
+  console.log(`🚀 Server started on port ${PORT}`);
+  console.log(`📍 Local: http://localhost:${PORT}`);
+  console.log(`📍 Network: http://0.0.0.0:${PORT}`);
 });
